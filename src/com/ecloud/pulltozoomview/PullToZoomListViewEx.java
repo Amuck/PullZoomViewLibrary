@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -31,6 +32,7 @@ public class PullToZoomListViewEx extends PullToZoomBase<ListView> implements Ab
     private FrameLayout mHeaderContainer;
     private int mHeaderHeight;
     private ScalingRunnable mScalingRunnable;
+    private ListView lv;
 
     private static final Interpolator sInterpolator = new Interpolator() {
         public float getInterpolation(float paramAnonymousFloat) {
@@ -132,7 +134,7 @@ public class PullToZoomListViewEx extends PullToZoomBase<ListView> implements Ab
      */
     @Override
     protected ListView createRootView(Context context, AttributeSet attrs) {
-        ListView lv = new ListView(context, attrs);
+        lv = new ListView(context, attrs);
         // Set it to this so it can be used in ListActivity/ListFragment
         lv.setId(android.R.id.list);
         return lv;
@@ -262,7 +264,26 @@ public class PullToZoomListViewEx extends PullToZoomBase<ListView> implements Ab
             }
         }
     }
+    
+    public int getLastVisiblePosition() {
+    	return lv.getLastVisiblePosition();
+    }
 
+    public void addFooterView(View v) {
+    	lv.addFooterView(v);
+    }
+    
+    public void removeFooterView(View v) {
+    	lv.removeFooterView(v);
+    }
+    
+    public int getFooterViewsCount() {
+    	return lv.getFooterViewsCount();
+    }
+    
+    public void setOnScrollListener(OnScrollListener l) {
+    	lv.setOnScrollListener(l);
+    }
 
     class ScalingRunnable implements Runnable {
         protected long mDuration;
