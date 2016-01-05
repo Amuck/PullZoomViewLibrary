@@ -137,6 +137,7 @@ public class PullToZoomListViewEx extends PullToZoomBase<ListView> implements Ab
         lv = new ListView(context, attrs);
         // Set it to this so it can be used in ListActivity/ListFragment
         lv.setId(android.R.id.list);
+        lv.setSelector(R.color.transparent);
         return lv;
     }
 
